@@ -193,25 +193,25 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 #pragma mark - private method
 
 - (void)showViewAnimation {
-    __weak typeof(self) wSelf = self;
+    __weak __typeof(&*self)weakSelf = self;
     [UIView animateWithDuration:[self animationDuration] animations:^{
         CGRect frame = _tableView.frame;
-        frame.origin.y = CGRectGetHeight(wSelf.bounds) - frame.size.height;
-        wSelf.tableView.frame = frame;
-        wSelf.backgroundView.alpha = 0.5;
+        frame.origin.y = CGRectGetHeight(weakSelf.bounds) - frame.size.height;
+        weakSelf.tableView.frame = frame;
+        weakSelf.backgroundView.alpha = 0.5;
     }];
 }
 
 - (void)dismissViewAnimation {
-    __weak typeof(self) wSelf = self;
+    __weak __typeof(&*self)weakSelf = self;
     [UIView animateWithDuration:[self animationDuration] animations:^{
         CGRect frame = _tableView.frame;
-        frame.origin.y = CGRectGetHeight(wSelf.bounds);
-        wSelf.tableView.frame = frame;
-        wSelf.backgroundView.alpha = 0.0;
+        frame.origin.y = CGRectGetHeight(weakSelf.bounds);
+        weakSelf.tableView.frame = frame;
+        weakSelf.backgroundView.alpha = 0.0;
     } completion:^(BOOL finished) {
         if (finished) {
-            [wSelf removeFromSuperview];
+            [weakSelf removeFromSuperview];
         }
     }];
 }
