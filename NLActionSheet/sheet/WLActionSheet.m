@@ -198,12 +198,11 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 - (void)showViewAnimation {
 //    __weak __typeof(&*self)weakSelf = self;
-    WEAKSELF;
     [UIView animateWithDuration:[self animationDuration] animations:^{
         CGRect frame = _tableView.frame;
-        frame.origin.y = CGRectGetHeight(weakSelf.bounds) - frame.size.height;
-        weakSelf.tableView.frame = frame;
-        weakSelf.backgroundView.alpha = 0.5;
+        frame.origin.y = CGRectGetHeight(self.bounds) - frame.size.height;
+        self.tableView.frame = frame;
+        self.backgroundView.alpha = 0.5;
     }];
 }
 
