@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "NLActionSheet.h"
+#import "WLActionSheet.h"
 
 @interface ViewController ()
 
@@ -21,7 +21,7 @@
 }
 - (IBAction)actionSheetShow:(id)sender {
     
-    NLActionSheet *sheet = [[NLActionSheet alloc] initWithTitle:@"提示" cancelTitle:@"cancel" otherTitles:@[@"拍照",@"相册"]];
+    WLActionSheet *sheet = [[WLActionSheet alloc] initWithTitle:@"提示" cancelTitle:@"cancel" otherTitles:@[@"拍照",@"相册"]];
     sheet.destructiveButtonIndex = 0;
     [sheet showView];
     [sheet dismissForCompletionHandle:^(NSInteger clickedIndex, BOOL isCancel) {

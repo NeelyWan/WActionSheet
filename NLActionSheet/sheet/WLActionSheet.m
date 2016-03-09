@@ -6,7 +6,11 @@
 //  Copyright © 2016年 万匿里. All rights reserved.
 //
 
-#import "NLActionSheet.h"
+#import "WLActionSheet.h"
+
+// block self
+#define WEAKSELF typeof(self) __weak weakSelf = self;
+#define STRONGSELF typeof(weakSelf) __strong strongSelf = weakSelf;
 
 const CGFloat KJX_MinButtonHeight = 50.;
 const CGFloat KJX_Edges = 15.;
@@ -15,7 +19,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 //***************************** JXSheetModel ***********************************//
 
-@interface NLSheetModel : NSObject
+@interface WLSheetModel : NSObject
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CGFloat height;
@@ -25,10 +29,10 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 @end
 
-@implementation NLSheetModel
+@implementation WLSheetModel
 
 + (instancetype)modelWithTitle:(NSString *)title font:(UIFont *)font {
-    NLSheetModel *model = [[NLSheetModel alloc] init];
+    WLSheetModel *model = [[WLSheetModel alloc] init];
     if (model) {
         model.title = title;
         model.height = [model heightForFont:font];
@@ -51,11 +55,11 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 //***************************** JXSheetItem ***********************************//
 
-@interface NLSheetItem : UITableViewCell
+@interface WLSheetItem : UITableViewCell
 
 @end
 
-@implementation NLSheetItem
+@implementation WLSheetItem
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -74,11 +78,11 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 //***************************** JXActionSheet ***********************************//
 
-@interface NLActionSheet () <UITableViewDataSource, UITableViewDelegate>
+@interface WLActionSheet () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nullable, nonatomic, strong) NLSheetModel *titleModel;
-@property (nullable, nonatomic, strong) NLSheetModel *cancelModel;
-@property (nullable, nonatomic, copy) NSArray<NLSheetModel *> *otherModels;
+@property (nullable, nonatomic, strong) WLSheetModel *titleModel;
+@property (nullable, nonatomic, strong) WLSheetModel *cancelModel;
+@property (nullable, nonatomic, copy) NSArray<WLSheetModel *> *otherModels;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) CGFloat tableViewHeight;
@@ -90,7 +94,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 @end
 
-@implementation NLActionSheet
+@implementation WLActionSheet
 
 #pragma mark - life cycle
 
@@ -159,7 +163,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
         [_cancelModel updateHeightForFont:_otherTitlesFont];
     }
     if (_otherTitles) {
-        for (NLSheetModel *model in _otherModels) {
+        for (WLSheetModel *model in _otherModels) {
             if (model) {
                 [model updateHeightForFont:_otherTitlesFont];
             }
@@ -194,11 +198,12 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 
 - (void)showViewAnimation {
 //    __weak __typeof(&*self)weakSelf = self;
+    WEAKSELF;
     [UIView animateWithDuration:[self animationDuration] animations:^{
         CGRect frame = _tableView.frame;
-        frame.origin.y = CGRectGetHeight(self.bounds) - frame.size.height;
-        self.tableView.frame = frame;
-        self.backgroundView.alpha = 0.5;
+        frame.origin.y = CGRectGetHeight(weakSelf.bounds) - frame.size.height;
+        weakSelf.tableView.frame = frame;
+        weakSelf.backgroundView.alpha = 0.5;
     }];
 }
 
@@ -233,12 +238,12 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
     h += _titleModel.height;
     h += _cancelModel ? _cancelModel.height + KJX_sectionHeight : 0.;
     if (_otherModels.count) {
-        for (NLSheetModel *model in _otherModels) {
+        for (WLSheetModel *model in _otherModels) {
             h += model.height;
         }
     }
     if ((NSInteger)h == 0) {
-        self.cancelModel = [NLSheetModel modelWithTitle:@"" font:_otherTitlesFont];
+        self.cancelModel = [WLSheetModel modelWithTitle:@"" font:_otherTitlesFont];
         h = _cancelModel.height;
         return h;
     }
@@ -263,9 +268,9 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NLSheetItem *item = [tableView dequeueReusableCellWithIdentifier:KJX_ItemIdentifier];
+    WLSheetItem *item = [tableView dequeueReusableCellWithIdentifier:KJX_ItemIdentifier];
     if (!item) {
-        item = [[NLSheetItem alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KJX_ItemIdentifier];
+        item = [[WLSheetItem alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KJX_ItemIdentifier];
         item.textLabel.numberOfLines = 0;
         item.textLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -291,7 +296,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
         }
         else {
             NSInteger row = _titleModel ? indexPath.row - 1 : indexPath.row;
-            NLSheetModel *otherModel = _otherModels[row];
+            WLSheetModel *otherModel = _otherModels[row];
             cell.textLabel.text = otherModel.title;
             if (row == _destructiveButtonIndex) {
                 cell.textLabel.textColor = _destructiveColor;
@@ -315,7 +320,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
         return _cancelModel.height;
     } else {
         NSInteger row = _titleModel ? indexPath.row - 1 : indexPath.row;
-        NLSheetModel *model = _otherModels[row];
+        WLSheetModel *model = _otherModels[row];
         return model.height;
     }
 }
@@ -344,7 +349,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 - (void)setTitle:(NSString *)title {
     _title = title;
     if (title.length) {
-        self.titleModel = [NLSheetModel modelWithTitle:title font:_titleFont];
+        self.titleModel = [WLSheetModel modelWithTitle:title font:_titleFont];
     }
     else {
         self.titleModel = nil;
@@ -354,7 +359,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
 - (void)setCancelTitle:(NSString *)cancelTitle {
     _cancelTitle = cancelTitle;
     if (cancelTitle.length) {
-        self.cancelModel = [NLSheetModel modelWithTitle:cancelTitle font:_otherTitlesFont];
+        self.cancelModel = [WLSheetModel modelWithTitle:cancelTitle font:_otherTitlesFont];
     }
     else {
         self.cancelModel = nil;
@@ -367,7 +372,7 @@ NSString *const KJX_ItemIdentifier = @"KJX.Wang_Item";
     else {
         NSMutableArray *temps = @[].mutableCopy;
         for (NSString *title in _otherTitles) {
-            NLSheetModel *model = [NLSheetModel modelWithTitle:title font:_otherTitlesFont];
+            WLSheetModel *model = [WLSheetModel modelWithTitle:title font:_otherTitlesFont];
             if (model) {
                 [temps addObject:model];
             }

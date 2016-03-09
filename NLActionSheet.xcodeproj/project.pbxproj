@@ -13,7 +13,7 @@
 		30DD94661C8EAB2E00A3A705 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30DD94641C8EAB2E00A3A705 /* Main.storyboard */; };
 		30DD94681C8EAB2E00A3A705 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30DD94671C8EAB2E00A3A705 /* Assets.xcassets */; };
 		30DD946B1C8EAB2E00A3A705 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30DD94691C8EAB2E00A3A705 /* LaunchScreen.storyboard */; };
-		30DD94751C8EABB800A3A705 /* NLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DD94741C8EABB800A3A705 /* NLActionSheet.m */; };
+		30DD94751C8EABB800A3A705 /* WLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DD94741C8EABB800A3A705 /* WLActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		30DD94671C8EAB2E00A3A705 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30DD946A1C8EAB2E00A3A705 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30DD946C1C8EAB2E00A3A705 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30DD94731C8EABB800A3A705 /* NLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLActionSheet.h; sourceTree = "<group>"; };
-		30DD94741C8EABB800A3A705 /* NLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLActionSheet.m; sourceTree = "<group>"; };
+		30DD94731C8EABB800A3A705 /* WLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLActionSheet.h; sourceTree = "<group>"; };
+		30DD94741C8EABB800A3A705 /* WLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLActionSheet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,8 @@
 		30DD94721C8EAB7600A3A705 /* sheet */ = {
 			isa = PBXGroup;
 			children = (
-				30DD94731C8EABB800A3A705 /* NLActionSheet.h */,
-				30DD94741C8EABB800A3A705 /* NLActionSheet.m */,
+				30DD94731C8EABB800A3A705 /* WLActionSheet.h */,
+				30DD94741C8EABB800A3A705 /* WLActionSheet.m */,
 			);
 			path = sheet;
 			sourceTree = "<group>";
@@ -165,7 +165,7 @@
 				30DD94631C8EAB2E00A3A705 /* ViewController.m in Sources */,
 				30DD94601C8EAB2E00A3A705 /* AppDelegate.m in Sources */,
 				30DD945D1C8EAB2E00A3A705 /* main.m in Sources */,
-				30DD94751C8EABB800A3A705 /* NLActionSheet.m in Sources */,
+				30DD94751C8EABB800A3A705 /* WLActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +314,7 @@
 				30DD94711C8EAB2E00A3A705 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

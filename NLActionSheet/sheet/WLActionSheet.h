@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef void(^JXSheetCompletionHanlde)(NSInteger clickedIndex, BOOL isCancel);
 
-@interface NLActionSheet : UIView
+@interface WLActionSheet : UIView
 
 @property (nullable, nonatomic, copy) NSString *title;
 @property (nullable, nonatomic, copy) NSString *cancelTitle;
